@@ -1,18 +1,23 @@
 .card {
-    width: 700px;
+    margin: 4px;
+}
+
+.toDoText {
+    position: relative;
+    width: 350px;
 }
 
 .createDate {
-    position: absolute;
-    left: 430px;
+    position: relative;
+    width: 80px;
 }
 
 .updateDate {
-    position: absolute;
-    left: 530px;
+    position: relative;
+    width: 80px;
 }
 
 .more {
-    position: absolute;
-    left: 640px;
+    position: relative;
+    right: 0px;
 }

@@ -9,24 +9,21 @@ import styles from './ToDoItem.module.css';
 class ToDoItem extends Component {
     render() {
         return (
-            <React.Fragment>
-                <Card className={styles.card}>
-                    <CardActions>
+            <Card className={styles.card}>
+                <CardActions>
+                    <IconButton>
+                        <CheckButton/>
+                    </IconButton>
+                    <p className={styles.toDoText}>{this.props.toDoText}</p>
+                    <p className={styles.createDate}>{this.props.createDate}</p>
+                    <p className={styles.updateDate}>{this.props.updateDate}</p>
+                    <div className={styles.more}>
                         <IconButton>
-                            <CheckButton/>
+                            <MoreHorizButton/>
                         </IconButton>
-                        <p>{this.props.toDoText}</p>
-                        <p className={styles.createDate}>{this.props.createDate}</p>
-                        <p className={styles.updateDate}>{this.props.updateDate}</p>
-                        <div className={styles.more}>
-                            <IconButton>
-                                <MoreHorizButton/>
-                            </IconButton>
-                        </div>
-                    </CardActions>
-                </Card>
-                <br/>
-            </React.Fragment>
+                    </div>
+                </CardActions>
+            </Card>
         );
     }
 }

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
 import ToDoItem from './ToDoItem';
+import styles from './ToDo.module.css';
 
 class ToDo extends Component {
     render() {
         return (
-            <div className="centerr">
+            <div className={styles.center}>
                 <ToDoItem 
                     toDoText="Example of a ToDo item"
                     createDate="Jan 10"
