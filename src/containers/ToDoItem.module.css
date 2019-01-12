@@ -1,0 +1,18 @@
+.card {
+    width: 700px;
+}
+
+.createDate {
+    position: absolute;
+    left: 430px;
+}
+
+.updateDate {
+    position: absolute;
+    left: 530px;
+}
+
+.more {
+    position: absolute;
+    left: 640px;
+}
