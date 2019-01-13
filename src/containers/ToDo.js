@@ -5,25 +5,52 @@ import ToDoCreator from './ToDoCreator';
 import FieldTitles from './FieldTitles';
 import styles from './ToDo.module.css';
 
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
+    'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 class ToDo extends Component {
+
+    state = {
+        toDoItems: []
+    }
+
+    onAddItem = (text) => {
+        const toDoItems = [...this.state.toDoItems];
+
+        const date = new Date();
+        const time = months[date.getMonth()] + " " + date.getDate();
+        const newToDoItem = (
+            <ToDoItem
+                toDoText={text}
+                createDate={time}
+                updateDate={time}/>
+        );
+        toDoItems.unshift(newToDoItem);
+
+        this.setState({ toDoItems });
+    }
+
     render() {
+        /*
+        const toDoList = (
+            <div>
+                {this.state.toDoItems.map((toDoItem, index) => {
+                    return <ToDoItem
+                        key={index}
+                        toDoText={toDoItem.toDoText}
+                        createDate={toDoItem.createDate}
+                        updateDate={toDoItem.updateDate}/>
+                })}
+            </div>
+        );
+        */
+
         return (
             <div className={styles.center}>
                 <Header/>
-                <ToDoCreator/>
+                <ToDoCreator onToDoCreate={this.onAddItem}/>
                 <FieldTitles/>
-                <ToDoItem 
-                    toDoText="Example of a ToDo item"
-                    createDate="Jan 10"
-                    updateDate="Jan 10"/>
-                <ToDoItem 
-                    toDoText="Another example of a ToDo item"
-                    createDate="Jan 10"
-                    updateDate="Jan 11"/>
-                <ToDoItem 
-                    toDoText="Simple ToDo item"
-                    createDate="Jan 11"
-                    updateDate="Jan 12"/>
+                {this.state.toDoItems}
             </div>
         );
     }

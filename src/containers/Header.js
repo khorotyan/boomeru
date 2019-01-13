@@ -32,7 +32,7 @@ class Header extends Component {
     }
 
     handleStatusChange = event => {
-        var statusSelector = {...this.state.statusSelector};
+        let statusSelector = {...this.state.statusSelector};
         statusSelector.status = event.target.value;
         statusSelector.open = false;
 
@@ -40,21 +40,21 @@ class Header extends Component {
     }
 
     handleStatusOpen = () => {
-        var statusSelector = {...this.state.statusSelector};
+        let statusSelector = {...this.state.statusSelector};
         statusSelector.open = true;
 
         this.setState({ statusSelector })
     }
 
     handleStatusClose = () => {
-        var statusSelector = {...this.state.statusSelector};
+        let statusSelector = {...this.state.statusSelector};
         statusSelector.open = false;
 
         this.setState({ statusSelector })
     }
 
     handleFilterChange = event => {
-        var filterSelector = {...this.state.filterSelector};
+        let filterSelector = {...this.state.filterSelector};
         filterSelector.filter = event.target.value;
         filterSelector.open = false;
 
@@ -62,14 +62,14 @@ class Header extends Component {
     }
 
     handleFilterOpen = () => {
-        var filterSelector = {...this.state.filterSelector};
+        let filterSelector = {...this.state.filterSelector};
         filterSelector.open = true;
 
         this.setState({ filterSelector })
     }
 
     handleFilterClose = () => {
-        var filterSelector = {...this.state.filterSelector};
+        let filterSelector = {...this.state.filterSelector};
         filterSelector.open = false;
 
         this.setState({ filterSelector })

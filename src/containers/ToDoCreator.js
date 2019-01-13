@@ -8,22 +8,46 @@ import Close from '@material-ui/icons/Close';
 import styles from './ToDoCreator.module.css';
 
 class ToDoCreator extends Component {
+
+    state = {
+        toDoText: ""
+    }
+
+    handleTextChange = event => {
+        this.setState({ toDoText: event.target.value });
+    }
+
+    handleToDoClear = () => {
+        this.setState({ toDoText: "" });
+    }
+
+    handleSaveClick = () => {
+        this.props.onToDoCreate(this.state.toDoText);
+
+        this.setState({ toDoText: "" });
+    }
+
     render() {
         return (
             <Card className={styles.card}>
                 <CardActions>
                     <InputBase 
                         className={styles.inputField} 
-                        placeholder="What would you like to do?"/>
+                        placeholder="What would you like to do?"
+                        value={this.state.toDoText}
+                        onChange={this.handleTextChange}/>
                     <Button className={styles.saveButton}
                         size="small"
                         variant="contained" 
                         color="primary"
-                        disabled={true}>
+                        disabled={this.state.toDoText.length<2}
+                        onClick={this.handleSaveClick}>
                         Save
                     </Button>
                     <div className={styles.closeButton}>
-                        <IconButton disabled={true}>
+                        <IconButton 
+                        disabled={this.state.toDoText.length===0}
+                        onClick={this.handleToDoClear}>
                             <Close/>
                         </IconButton>
                     </div>        
