@@ -1,0 +1,23 @@
+.card {
+    margin-top: 24px;
+    margin-bottom: 4px;
+    width: 650px;
+    height: 64px;
+    display: flex;
+}
+
+.inputField {
+    position: relative;
+    width: 480px;
+    padding-left: 10px;
+}
+
+.saveButton {
+    position: relative;
+    right: 0px;
+}
+
+.closeButton {
+    position: relative;
+    left: 16px;
+}

@@ -1,0 +1,40 @@
+.pageName {
+    position: relative;
+    left: 40px;
+    width: 58%;
+}
+
+.searchRoot {
+    position: relative;
+    left: 0px;
+    height: 36px;
+    padding: 2px 2px;
+    display: flex;
+    align-items: center;
+    width: 300px;
+}
+
+.searchInput {
+    margin-left: 14px;
+    flex: 1;
+}
+
+.searchButton {
+    width: 37px;
+    height: 37px;
+    padding: 12px;
+}
+
+.statusSelector {
+    position: relative;
+    left: 100px;
+}
+
+.filterSelector {
+    position: relative;
+    left: 50px;
+}
+
+.selectorWidth {
+    min-width: 90px;
+}

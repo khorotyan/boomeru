@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-
+import Header from './Header';
 import ToDoItem from './ToDoItem';
+import ToDoCreator from './ToDoCreator';
+import FieldTitles from './FieldTitles';
 import styles from './ToDo.module.css';
 
 class ToDo extends Component {
     render() {
         return (
             <div className={styles.center}>
+                <Header/>
+                <ToDoCreator/>
+                <FieldTitles/>
                 <ToDoItem 
                     toDoText="Example of a ToDo item"
                     createDate="Jan 10"

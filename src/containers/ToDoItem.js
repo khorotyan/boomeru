@@ -17,7 +17,7 @@ class ToDoItem extends Component {
                     <p className={styles.toDoText}>{this.props.toDoText}</p>
                     <p className={styles.createDate}>{this.props.createDate}</p>
                     <p className={styles.updateDate}>{this.props.updateDate}</p>
-                    <div className={styles.more}>
+                    <div className={styles.moreButton}>
                         <IconButton>
                             <MoreHorizButton/>
                         </IconButton>

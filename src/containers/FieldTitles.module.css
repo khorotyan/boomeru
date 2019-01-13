@@ -1,0 +1,18 @@
+.centralDiv {
+    width: 650px;
+}
+
+.createdButton {
+    position: relative;
+    left: 412px;
+}
+
+.updatedButton {
+    position: relative;
+    left: 426px;
+}
+
+.moreButton {
+    position: relative;
+    left: 450px;
+}
