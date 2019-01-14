@@ -19,38 +19,45 @@ class ToDo extends Component {
 
         const date = new Date();
         const time = months[date.getMonth()] + " " + date.getDate();
-        const newToDoItem = (
-            <ToDoItem
-                toDoText={text}
-                createDate={time}
-                updateDate={time}/>
-        );
+        const newToDoItem = ({
+            isDone: false,
+            toDoText: text,
+            createDate: time,
+            updateDate: time
+        });
         toDoItems.unshift(newToDoItem);
 
         this.setState({ toDoItems });
     }
 
+    onCheckClick = (index) => {
+        const toDoItems = [...this.state.toDoItems];
+        toDoItems[index].isDone = !toDoItems[index].isDone;
+
+        this.setState({ toDoItems });
+    }
+
     render() {
-        /*
-        const toDoList = (
+        let toDoList = (
             <div>
                 {this.state.toDoItems.map((toDoItem, index) => {
                     return <ToDoItem
                         key={index}
+                        isDone={toDoItem.isDone}
                         toDoText={toDoItem.toDoText}
                         createDate={toDoItem.createDate}
-                        updateDate={toDoItem.updateDate}/>
+                        updateDate={toDoItem.updateDate}
+                        onCheckClick={() => this.onCheckClick(index)}/>
                 })}
             </div>
         );
-        */
 
         return (
             <div className={styles.center}>
                 <Header/>
                 <ToDoCreator onToDoCreate={this.onAddItem}/>
                 <FieldTitles/>
-                {this.state.toDoItems}
+                {toDoList}
             </div>
         );
     }

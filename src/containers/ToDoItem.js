@@ -7,12 +7,19 @@ import MoreHorizButton from '@material-ui/icons/MoreHoriz';
 import styles from './ToDoItem.module.css';
 
 class ToDoItem extends Component {
+
+    handleCheckClick = () => {
+        this.props.onCheckClick();
+    }
+
     render() {
+        const checkColor = this.props.isDone ? "#67cb48" : "#C3C3C3";
+
         return (
             <Card className={styles.card}>
                 <CardActions>
-                    <IconButton>
-                        <CheckButton/>
+                    <IconButton onClick={this.handleCheckClick}>
+                        <CheckButton style={{color: checkColor}}/>
                     </IconButton>
                     <p className={styles.toDoText}>{this.props.toDoText}</p>
                     <p className={styles.createDate}>{this.props.createDate}</p>
