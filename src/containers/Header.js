@@ -75,6 +75,10 @@ class Header extends Component {
         this.setState({ filterSelector })
     }
 
+    handleSearchTextChange = event => {
+        this.props.onSearchTextChange(event.target.value);
+    }
+
     render() {
         return (
             <AppBar position="relative">
@@ -83,7 +87,10 @@ class Header extends Component {
                         Boomeru
                     </Typography>
                     <Paper className={styles.searchRoot} elevation={1}>
-                        <InputBase className={styles.searchInput} placeholder="Search..." />
+                        <InputBase 
+                            className={styles.searchInput} 
+                            placeholder="Search..."
+                            onChange={this.handleSearchTextChange}/>
                         <IconButton className={styles.searchButton} aria-label="Search">
                             <Search/>
                         </IconButton>

@@ -1,0 +1,27 @@
+  ___   ___   ___   ___   ___   ___   ___             ___   ___   ___   ___   ___   ___   ___
+- ___ - ___ - ___ - ___ - ___ - ___ - ___ - Boomeru - ___ - ___ - ___ - ___ - ___ - ___ - ___ -
+
+
+_______________________________________________________________________________________________
+
+Coming Soon:
+
+1. Filter by status
+2. Dropdown when clicking on the more button of the ToDoItem
+3. Ability to delete or archive a ToDoItem
+4. Click enter to add a ToDoItem 
+
+_______________________________________________________________________________________________
+
+
+_________________________________ v0.1.0 - January 14, 2019 ___________________________________
+
+Added:
+
+1. Store dates with type - Date and change the format before showing
+2. Sort items when clicking on the Created and Updated buttons
+3. Ability to search items
+
+Changes & Improvements:
+
+1. Small improvements in FieldTitles.js
