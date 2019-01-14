@@ -81,7 +81,7 @@ class ToDo extends Component {
         let toDoItems = this.state.toDoItems;
         const sortOrder = this.state.sortOrder;
         const filterText = this.state.filterText;
-
+ 
         toDoItems.sort((itemA, itemB) => {
             if (sortOrder.type === OrderType.createdOrder) {
                 return sortOrder.isDesc ? itemA.createDate - itemB.createDate 
