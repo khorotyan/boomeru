@@ -4,11 +4,12 @@ import ToDoItem from './ToDoItem';
 import ToDoCreator from './ToDoCreator';
 import FieldTitles from './FieldTitles';
 import styles from './ToDo.module.css';
+import StatusOptions from '../entities/StatusOptions';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
     'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const OrderType = Object.freeze({"createdOrder": 1, "updatedOrder": 2})
+const OrderType = Object.freeze({createdOrder: 1, updatedOrder: 2})
 
 class ToDo extends Component {
 
@@ -18,7 +19,8 @@ class ToDo extends Component {
             type: OrderType.createdOrder,
             isDesc: true
         },
-        filterText: ""
+        filterText: "",
+        selectedStatus: [StatusOptions.Open, StatusOptions.Closed]
     }
 
     onAddItem = (text) => {
@@ -77,11 +79,16 @@ class ToDo extends Component {
         this.setState({ filterText });
     }
 
+    applyStatusChange = (selectedStatus) => {
+        this.setState({ selectedStatus });
+    }
+
     render() {
         let toDoItems = this.state.toDoItems;
         const sortOrder = this.state.sortOrder;
         const filterText = this.state.filterText;
- 
+        const selectedStatus = this.state.selectedStatus;
+
         toDoItems.sort((itemA, itemB) => {
             if (sortOrder.type === OrderType.createdOrder) {
                 return sortOrder.isDesc ? itemA.createDate - itemB.createDate 
@@ -92,11 +99,22 @@ class ToDo extends Component {
             }
         });
 
-        if (filterText !== "") {
-            toDoItems = toDoItems.filter((toDoItem) => {
-                return toDoItem.toDoText.includes(filterText);
-            });
-        }
+        toDoItems = toDoItems.filter((toDoItem) => {
+            let filterPassed = true;
+            
+            if (filterText !== "") {
+                filterPassed = toDoItem.toDoText.includes(filterText);
+                
+                if (!filterPassed) return false;
+            }
+
+            if (selectedStatus.length == 0) return false;
+
+            filterPassed = (toDoItem.isDone && selectedStatus.includes(StatusOptions.Closed))
+                || (!toDoItem.isDone && selectedStatus.includes(StatusOptions.Open)); 
+
+            return filterPassed;
+        });
 
         const toDoList = (
             <div>
@@ -114,7 +132,7 @@ class ToDo extends Component {
 
         return (
             <div className={styles.center}>
-                <Header onSearchTextChange={this.searchToDoItems}/>
+                <Header onSearchTextChange={this.searchToDoItems} onStatusChange={this.applyStatusChange}/>
                 <ToDoCreator onToDoCreate={this.onAddItem}/>
                 <FieldTitles 
                     onCreatedClick={this.changeCreatedOrder} 

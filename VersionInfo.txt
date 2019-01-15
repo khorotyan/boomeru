@@ -10,6 +10,8 @@ Coming Soon:
 2. Dropdown when clicking on the more button of the ToDoItem
 3. Ability to delete or archive a ToDoItem
 4. Click enter to add a ToDoItem 
+5. Ability to edit a todo item
+6. Show titles only when there are todo items
 
 _______________________________________________________________________________________________
 

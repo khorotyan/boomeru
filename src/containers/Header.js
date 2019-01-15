@@ -12,21 +12,23 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import styles from './Header.module.css';
 import { Checkbox, ListItemText } from '@material-ui/core';
+import StatusOptions from '../entities/StatusOptions';
+import FilterOptions from '../entities/FilterOptions';
 
-const statusOptions = [
-    'Open',
-    'Closed'
+const allStatusOptions = [
+    StatusOptions.Open,
+    StatusOptions.Closed
 ];
 
 class Header extends Component {
 
     state = {
         statusSelector: {
-            status: ['Open', 'Closed'],
+            status: [StatusOptions.Open, StatusOptions.Closed],
             open: false
         },
         filterSelector: {
-            filter: 'None',
+            filter: FilterOptions.None,
             open: false
         }
     }
@@ -36,6 +38,7 @@ class Header extends Component {
         statusSelector.status = event.target.value;
         statusSelector.open = false;
 
+        this.props.onStatusChange(statusSelector.status);
         this.setState({ statusSelector });
     }
 
@@ -105,9 +108,9 @@ class Header extends Component {
                             onClose={this.handleFilterClose}
                             value={this.state.filterSelector.filter}
                             onChange={this.handleFilterChange}>
-                            <MenuItem value={"None"}>None</MenuItem>
-                            <MenuItem value={"Recurring"}>Recurring</MenuItem>
-                            <MenuItem value={"Archived"}>Archived</MenuItem>
+                            <MenuItem value={FilterOptions.None}>{FilterOptions.None}</MenuItem>
+                            <MenuItem value={FilterOptions.Recurring}>{FilterOptions.Recurring}</MenuItem>
+                            <MenuItem value={FilterOptions.Archived}>{FilterOptions.Archived}</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl className={styles.statusSelector}>
@@ -122,7 +125,7 @@ class Header extends Component {
                             value={this.state.statusSelector.status}
                             renderValue={selected => selected.join(', ')}
                             onChange={this.handleStatusChange}>
-                            {statusOptions.map(statusOption => (
+                            {allStatusOptions.map(statusOption => (
                                 <MenuItem key={statusOption} value={statusOption}>
                                     <Checkbox checked={this.state.statusSelector.status.indexOf(statusOption) > -1}/>
                                     <ListItemText primary={statusOption}/>
