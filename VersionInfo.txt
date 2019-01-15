@@ -6,12 +6,11 @@ ________________________________________________________________________________
 
 Coming Soon:
 
-1. Filter by status
-2. Dropdown when clicking on the more button of the ToDoItem
-3. Ability to delete or archive a ToDoItem
-4. Click enter to add a ToDoItem 
-5. Ability to edit a todo item
-6. Show titles only when there are todo items
+1. Dropdown when clicking on the more button of the ToDoItem
+2. Ability to delete or archive a ToDoItem
+3. Click enter to add a ToDoItem 
+4. Ability to edit a todo item
+5. Show titles only when there are todo items
 
 _______________________________________________________________________________________________
 
@@ -23,6 +22,7 @@ Added:
 1. Store dates with type - Date and change the format before showing
 2. Sort items when clicking on the Created and Updated buttons
 3. Ability to search items
+4. Filter by status
 
 Changes & Improvements:
 

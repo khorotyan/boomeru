@@ -16,25 +16,27 @@ class FieldTitles extends Component {
 
     render() {
         return (
-            <div className={styles.centralDiv}>
-                <Button 
-                    style={{color: "#949494"}}
-                    className={styles.createdButton} 
-                    size="small"
-                    onClick={this.handleCreatedClick}>
-                    CREATED
-                </Button>
-                <Button 
-                    style={{color: "#949494"}}
-                    className={styles.updatedButton} 
-                    size="small"
-                    onClick={this.handleUpdatedClick}>
-                    UPDATED
-                </Button>
-                <IconButton style={{color: "#949494"}} className={styles.moreButton}>
-                    <MoreHorizButton/>
-                </IconButton>
-            </div>
+            this.props.show ? 
+                <div className={styles.centralDiv}>
+                    <Button 
+                        style={{color: "#949494"}}
+                        className={styles.createdButton} 
+                        size="small"
+                        onClick={this.handleCreatedClick}>
+                        CREATED
+                    </Button>
+                    <Button 
+                        style={{color: "#949494"}}
+                        className={styles.updatedButton} 
+                        size="small"
+                        onClick={this.handleUpdatedClick}>
+                        UPDATED
+                    </Button>
+                    <IconButton style={{color: "#949494"}} className={styles.moreButton}>
+                        <MoreHorizButton/>
+                    </IconButton>
+                </div>
+            : null  
         );
     }
 }

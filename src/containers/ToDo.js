@@ -83,11 +83,32 @@ class ToDo extends Component {
         this.setState({ selectedStatus });
     }
 
-    render() {
+    filterItems() {
         let toDoItems = this.state.toDoItems;
-        const sortOrder = this.state.sortOrder;
         const filterText = this.state.filterText;
         const selectedStatus = this.state.selectedStatus;
+
+        return toDoItems.filter((toDoItem) => {
+            let filterPassed = true;
+            
+            if (filterText !== "") {
+                filterPassed = toDoItem.toDoText.includes(filterText);
+
+                if (!filterPassed) return false;
+            }
+
+            if (selectedStatus.length == 0) return false;
+
+            filterPassed = (toDoItem.isDone && selectedStatus.includes(StatusOptions.Closed))
+                || (!toDoItem.isDone && selectedStatus.includes(StatusOptions.Open)); 
+
+            return filterPassed;
+        });
+    }
+
+    render() {
+        let toDoItems = this.state.toDoItems;
+        const sortOrder = this.state.sortOrder; 
 
         toDoItems.sort((itemA, itemB) => {
             if (sortOrder.type === OrderType.createdOrder) {
@@ -99,22 +120,7 @@ class ToDo extends Component {
             }
         });
 
-        toDoItems = toDoItems.filter((toDoItem) => {
-            let filterPassed = true;
-            
-            if (filterText !== "") {
-                filterPassed = toDoItem.toDoText.includes(filterText);
-                
-                if (!filterPassed) return false;
-            }
-
-            if (selectedStatus.length == 0) return false;
-
-            filterPassed = (toDoItem.isDone && selectedStatus.includes(StatusOptions.Closed))
-                || (!toDoItem.isDone && selectedStatus.includes(StatusOptions.Open)); 
-
-            return filterPassed;
-        });
+        toDoItems = this.filterItems();
 
         const toDoList = (
             <div>
@@ -136,7 +142,8 @@ class ToDo extends Component {
                 <ToDoCreator onToDoCreate={this.onAddItem}/>
                 <FieldTitles 
                     onCreatedClick={this.changeCreatedOrder} 
-                    onUpdatedClick={this.changeUpdatedOrder}/>
+                    onUpdatedClick={this.changeUpdatedOrder}
+                    show={this.filterItems().length > 0}/>
                 {toDoList}
             </div>
         );
