@@ -8,7 +8,7 @@ Coming Soon:
 
 1. Dropdown when clicking on the more button of the ToDoItem
 2. Ability to delete or archive a ToDoItem
-3. Click enter to add a ToDoItem 
+3. Filter
 
 _______________________________________________________________________________________________
 
@@ -23,6 +23,7 @@ Added:
 4. Filter by status
 5. Show titles component only when there are todo items
 6. Ability to edit a todo item
+7. Click enter to add a ToDoItem 
 
 Changes & Improvements:
 

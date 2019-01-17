@@ -27,11 +27,18 @@ class ToDoCreator extends Component {
         this.setState({ toDoText: "" });
     }
 
+    handleEnterPress = event => {
+        if (event.key === 'Enter') {
+            this.handleSaveClick();
+        }
+    }
+
     render() {
         return (
             <Card className={styles.card}>
                 <CardActions>
                     <InputBase 
+                        onKeyPress={this.handleEnterPress}
                         className={styles.inputField} 
                         placeholder="What would you like to do?"
                         value={this.state.toDoText}
