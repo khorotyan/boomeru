@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MoreHorizButton from '@material-ui/icons/MoreHoriz';
+//import IconButton from '@material-ui/core/IconButton';
+//import MoreHorizButton from '@material-ui/icons/MoreHoriz';
 import styles from './FieldTitles.module.css';
 
 class FieldTitles extends Component {
@@ -32,9 +32,11 @@ class FieldTitles extends Component {
                         onClick={this.handleUpdatedClick}>
                         UPDATED
                     </Button>
+                    {/*
                     <IconButton style={{color: "#949494"}} className={styles.moreButton}>
                         <MoreHorizButton/>
                     </IconButton>
+                    */}
                 </div>
             : null  
         );

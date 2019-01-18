@@ -47,7 +47,7 @@ class ToDo extends Component {
 
     changeIsDoneStatus = (id) => {
         const toDoItems = [...this.state.toDoItems];
-        const index = toDoItems.findIndex((toDoItem) => toDoItem.id === id);
+        const index = this.getItemIndex(toDoItems, id);
 
         toDoItems[index].isDone = !toDoItems[index].isDone;
 
@@ -115,12 +115,36 @@ class ToDo extends Component {
         });
     }
 
+    getItemIndex = (toDoItems, id) => {
+        return toDoItems.findIndex((toDoItem) => toDoItem.id === id);
+    }
+
     changeToDoText = (newText, id) => {
         const toDoItems = [...this.state.toDoItems];
-        const index = toDoItems.findIndex((toDoItem) => toDoItem.id === id);
+        const index = this.getItemIndex(toDoItems, id);
         toDoItems[index].toDoText = newText;
 
         this.setState({ toDoItems });
+    }
+
+    makeItemRecurring = (id) => {
+        const toDoItems = [...this.state.toDoItems];
+        const index = this.getItemIndex(toDoItems, id);
+    }
+
+    archiveItem = (id) => {
+        const toDoItems = [...this.state.toDoItems];
+        const index = this.getItemIndex(toDoItems, id);
+    }
+
+    deleteItem = (id) => {
+        const toDoItems = [...this.state.toDoItems];
+        const index = this.getItemIndex(toDoItems, id);
+
+        if (index > -1) {
+            toDoItems.splice(index, 1);
+            this.setState({ toDoItems });
+        }
     }
 
     render() {
@@ -148,8 +172,13 @@ class ToDo extends Component {
                         toDoText={toDoItem.toDoText}
                         createDate={this.toShowDateFormat(toDoItem.createDate)}
                         updateDate={this.toShowDateFormat(toDoItem.updateDate)}
+                        isRecurring={toDoItem.isRecurring}
+                        isArchived={toDoItem.isArchived}
                         onCheckClick={() => this.changeIsDoneStatus(toDoItem.id)}
-                        onToDoTextChange={(newText) => this.changeToDoText(newText, toDoItem.id)}/>
+                        onToDoTextChange={(newText) => this.changeToDoText(newText, toDoItem.id)}
+                        onItemRecurringClick={() => this.makeItemRecurring(toDoItem.id)}
+                        onItemArchiveClick={() => this.archiveItem(toDoItem.id)}
+                        onItemDeleteClick={() => this.deleteItem(toDoItem.id)}/>
                 })}
             </div>
         );
