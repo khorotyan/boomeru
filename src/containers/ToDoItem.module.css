@@ -22,14 +22,3 @@
     position: relative;
     width: 360px;
 }
-
-.parentJust {
-    position: relative;
-    left: 0px;
-}
-
-.just {
-    position: absolute;
-    top: 0px;
-    left: 50%;
-}

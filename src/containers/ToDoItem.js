@@ -74,14 +74,10 @@ class ToDoItem extends Component {
                     <p className={styles.createDate}>{this.props.createDate}</p>
                     <p className={styles.updateDate}>{this.props.updateDate}</p>
                     <IconButton
-                        aria-label="More"
-                        aria-owns={isMoreOpen ? 'more-menu' : undefined}
-                        aria-haspopup="true"
                         onClick={this.handleMoreOpen}>
                         <MoreHorizButton/>
                     </IconButton>
                     <Menu
-                        id="more-menu"
                         anchorEl={moreAnchorEl}
                         open={isMoreOpen}
                         onClose={this.handleMoreClose}>
