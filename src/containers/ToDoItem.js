@@ -3,15 +3,16 @@ import Card from '@material-ui/core/Card';
 import InputBase from '@material-ui/core/InputBase';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
-import CheckButton from '@material-ui/icons/Check';
+import CheckIcon from '@material-ui/icons/Check';
+import RepeatIcon from '@material-ui/icons/Repeat';
 import MoreHorizButton from '@material-ui/icons/MoreHoriz';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import styles from './ToDoItem.module.css';
 
 const moreOptions = [
-    'Make recurring',
-    'Archive',
+    'Make recurring', // Undo recurring
+    'Archive', // Unarchive
     'Delete'
 ];
 
@@ -60,17 +61,20 @@ class ToDoItem extends Component {
         const moreAnchorEl = this.state.moreAnchorEl;
         const isMoreOpen = Boolean(moreAnchorEl);
         const checkColor = this.props.isDone ? "#67cb48" : "#C3C3C3";
+        const isRecurring = this.props.isRecurring;
+        const inputWidth = isRecurring ? 320 : 350;
 
         return (
             <Card className={styles.card}>
                 <CardActions>
                     <IconButton onClick={this.handleCheckClick}>
-                        <CheckButton style={{color: checkColor}}/>
+                        <CheckIcon style={{color: checkColor}}/>
                     </IconButton>
-                    <InputBase 
-                        className={styles.textInput} 
+                    <InputBase
+                        style={{width: inputWidth}} 
                         value={this.props.toDoText}
                         onChange={this.handleTextChange}/>
+                    {isRecurring ? <RepeatIcon/> : null}
                     <p className={styles.createDate}>{this.props.createDate}</p>
                     <p className={styles.updateDate}>{this.props.updateDate}</p>
                     <IconButton

@@ -32,11 +32,6 @@ class FieldTitles extends Component {
                         onClick={this.handleUpdatedClick}>
                         UPDATED
                     </Button>
-                    {/*
-                    <IconButton style={{color: "#949494"}} className={styles.moreButton}>
-                        <MoreHorizButton/>
-                    </IconButton>
-                    */}
                 </div>
             : null  
         );

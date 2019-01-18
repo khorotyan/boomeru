@@ -22,9 +22,10 @@ class ToDoCreator extends Component {
     }
 
     handleSaveClick = () => {
-        this.props.onToDoCreate(this.state.toDoText);
-
-        this.setState({ toDoText: "" });
+        if (this.state.toDoText.length > 1) {
+            this.props.onToDoCreate(this.state.toDoText);
+            this.setState({ toDoText: "" });
+        }
     }
 
     handleEnterPress = event => {

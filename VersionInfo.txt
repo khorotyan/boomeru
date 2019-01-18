@@ -6,9 +6,9 @@ ________________________________________________________________________________
 
 Coming Soon:
 
-1. Ability to archive a ToDoItem or make it recurring
-2. Todo item Filter (Recurring or Archived)
-3. Undo when deleting an item
+1. Undo when deleting an item
+2. Duplicate an item
+3. Cache data in the browser
 
 _______________________________________________________________________________________________
 
@@ -25,8 +25,14 @@ Added:
 6. Ability to edit a todo item
 7. Click enter to add a ToDoItem 
 8. Dropdown when clicking on the more button of the ToDoItem
-9. Ability to delete a ToDoItem
+9. Ability to delete a ToDoItem 
+
+10. Ability to archive a ToDoItem 
+11. Ability to make a ToDoItem recurring
+12. Working Filter for recurring and archived ToDoItems
 
 Changes & Improvements:
 
 1. Small improvements in FieldTitles.js
+
+2. Validation when clicking enter

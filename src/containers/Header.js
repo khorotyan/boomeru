@@ -58,8 +58,11 @@ class Header extends Component {
 
     handleFilterChange = event => {
         let filterSelector = {...this.state.filterSelector};
-        filterSelector.filter = event.target.value;
+        const newFilter = event.target.value;
+        filterSelector.filter = newFilter;
         filterSelector.open = false;
+
+        this.props.onFilterChange(newFilter);
 
         this.setState({ filterSelector });
     }

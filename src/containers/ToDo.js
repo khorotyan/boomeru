@@ -5,6 +5,7 @@ import ToDoCreator from './ToDoCreator';
 import FieldTitles from './FieldTitles';
 import styles from './ToDo.module.css';
 import StatusOptions from '../entities/StatusOptions';
+import FilterOptions from '../entities/FilterOptions';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
     'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -20,6 +21,7 @@ class ToDo extends Component {
             isDesc: true
         },
         filterText: "",
+        selectedFilter: FilterOptions.None,
         selectedStatus: [StatusOptions.Open, StatusOptions.Closed]
     }
 
@@ -38,7 +40,9 @@ class ToDo extends Component {
             isDone: false,
             toDoText: text,
             createDate: date,
-            updateDate: date
+            updateDate: date,
+            isRecurring: false,
+            isArchived: false
         });
         toDoItems.unshift(newToDoItem);
 
@@ -92,10 +96,15 @@ class ToDo extends Component {
         this.setState({ selectedStatus });
     }
 
+    applyFilterChange = (selectedFilter) => {
+        this.setState({ selectedFilter });
+    }
+
     filterItems = (sortedToDoItems = null) => {
         let toDoItems = sortedToDoItems === null ? [...this.state.toDoItems] : sortedToDoItems;
         const filterText = this.state.filterText;
         const selectedStatus = this.state.selectedStatus;
+        const selectedFilter = this.state.selectedFilter;
 
         return toDoItems.filter((toDoItem) => {
             let filterPassed = true;
@@ -110,6 +119,16 @@ class ToDo extends Component {
 
             filterPassed = (toDoItem.isDone && selectedStatus.includes(StatusOptions.Closed))
                 || (!toDoItem.isDone && selectedStatus.includes(StatusOptions.Open)); 
+
+            if (!filterPassed) return false;
+
+            filterPassed = (toDoItem.isArchived && selectedFilter === FilterOptions.Archived)
+                || (!toDoItem.isArchived && selectedFilter !== FilterOptions.Archived);
+
+            if (!filterPassed) return false;
+
+            filterPassed = (toDoItem.isRecurring && selectedFilter === FilterOptions.Recurring)
+                || (selectedFilter !== FilterOptions.Recurring);
 
             return filterPassed;
         });
@@ -130,11 +149,17 @@ class ToDo extends Component {
     makeItemRecurring = (id) => {
         const toDoItems = [...this.state.toDoItems];
         const index = this.getItemIndex(toDoItems, id);
+        toDoItems[index].isRecurring = !toDoItems[index].isRecurring;
+
+        this.setState({ toDoItems });
     }
 
     archiveItem = (id) => {
         const toDoItems = [...this.state.toDoItems];
         const index = this.getItemIndex(toDoItems, id);
+        toDoItems[index].isArchived = !toDoItems[index].isArchived;
+
+        this.setState({ toDoItems });
     }
 
     deleteItem = (id) => {
@@ -185,7 +210,10 @@ class ToDo extends Component {
 
         return (
             <div className={styles.center}>
-                <Header onSearchTextChange={this.searchToDoItems} onStatusChange={this.applyStatusChange}/>
+                <Header 
+                    onSearchTextChange={this.searchToDoItems} 
+                    onStatusChange={this.applyStatusChange}
+                    onFilterChange={this.applyFilterChange}/>
                 <ToDoCreator onToDoCreate={this.onAddItem}/>
                 <FieldTitles 
                     onCreatedClick={this.changeCreatedOrder} 
