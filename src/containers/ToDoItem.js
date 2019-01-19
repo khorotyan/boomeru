@@ -98,6 +98,7 @@ class ToDoItem extends Component {
                         <CheckIcon style={{color: checkColor}}/>
                     </IconButton>
                     <InputBase
+                        multiline
                         style={{width: inputWidth}} 
                         value={this.props.toDoText}
                         onChange={this.handleTextChange}/>

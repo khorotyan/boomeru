@@ -1,7 +1,7 @@
 .card {
     margin-top: 24px;
     margin-bottom: 4px;
-    width: 650px;
+    width: 700px;
     height: 64px;
     display: flex;
 }
@@ -14,10 +14,10 @@
 
 .saveButton {
     position: relative;
-    right: 0px;
+    left: 33px;
 }
 
 .closeButton {
     position: relative;
-    left: 16px;
+    left: 68px;
 }

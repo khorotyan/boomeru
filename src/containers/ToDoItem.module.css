@@ -1,16 +1,16 @@
 .card {
     margin: 4px;
-    width: 650px;
+    width: 700px;
 }
 
 .createDate {
     position: relative;
-    width: 80px;
+    width: 148px;
 }
 
 .updateDate {
     position: relative;
-    width: 80px;
+    width: 148px;
 }
 
 .textInput {

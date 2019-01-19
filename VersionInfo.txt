@@ -6,8 +6,7 @@ ________________________________________________________________________________
 
 Coming Soon:
 
-1. Show time with dates
-2. Project structure and code improvements
+1. Project structure and code improvements
 
 _______________________________________________________________________________________________
 

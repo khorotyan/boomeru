@@ -46,7 +46,13 @@ class ToDo extends Component {
             return [];
         }
 
-        return JSON.parse(jsonToDoItems);
+        const toDoItems = JSON.parse(jsonToDoItems);
+
+        return toDoItems.map(todoItem => {
+            todoItem.createDate = new Date(todoItem.createDate);
+            todoItem.updateDate = new Date(todoItem.updateDate);
+            return todoItem;
+        });
     }
 
     handleSnackbarOpen = (toDoItem, index) => {
@@ -129,7 +135,15 @@ class ToDo extends Component {
 
     toShowDateFormat = (dateStr) => {
         const date = new Date(dateStr);
-        return months[date.getMonth()] + " " + date.getDate();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        const ampm = hours >= 12 ? "pm" : "am";
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+
+        return months[date.getMonth()] + " " + date.getDate() 
+            + ", " + hours + ":" + minutes + " " + ampm; 
     }
 
     changeCreatedOrder = () => {
