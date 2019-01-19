@@ -14,11 +14,13 @@ import CloseIcon from '@material-ui/icons/Close';
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
     'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+const TODOITEMS_KEY = "ToDoItems";
+
 const OrderType = Object.freeze({createdOrder: 1, updatedOrder: 2})
 
 class ToDo extends Component {
     state = {
-        toDoItems: [],
+        toDoItems: this.loadToDoItems(),
         sortOrder: {
             type: OrderType.createdOrder,
             isDesc: true
@@ -31,6 +33,20 @@ class ToDo extends Component {
             toDoItem: {},
             index: -1
         }
+    }
+
+    storeToDoItems = (toDoItems) => {
+        localStorage.setItem(TODOITEMS_KEY, JSON.stringify(toDoItems));
+    } 
+
+    loadToDoItems() {
+        const jsonToDoItems = localStorage.getItem(TODOITEMS_KEY);
+
+        if (jsonToDoItems === null) {
+            return [];
+        }
+
+        return JSON.parse(jsonToDoItems);
     }
 
     handleSnackbarOpen = (toDoItem, index) => {
@@ -97,6 +113,7 @@ class ToDo extends Component {
         });
         toDoItems.unshift(newToDoItem);
 
+        this.storeToDoItems(toDoItems);
         this.setState({ toDoItems });
     }
 
@@ -106,10 +123,12 @@ class ToDo extends Component {
 
         toDoItems[index].isDone = !toDoItems[index].isDone;
 
+        this.storeToDoItems(toDoItems);
         this.setState({ toDoItems });
     }
 
-    toShowDateFormat = (date) => {
+    toShowDateFormat = (dateStr) => {
+        const date = new Date(dateStr);
         return months[date.getMonth()] + " " + date.getDate();
     }
 
@@ -193,7 +212,9 @@ class ToDo extends Component {
         const toDoItems = [...this.state.toDoItems];
         const index = this.getItemIndex(toDoItems, id);
         toDoItems[index].toDoText = newText;
+        toDoItems[index].updateDate = new Date();
 
+        this.storeToDoItems(toDoItems);
         this.setState({ toDoItems });
     }
 
@@ -206,6 +227,7 @@ class ToDo extends Component {
         const index = this.getItemIndex(toDoItems, id);
         toDoItems[index].isRecurring = !toDoItems[index].isRecurring;
 
+        this.storeToDoItems(toDoItems);
         this.setState({ toDoItems });
     }
 
@@ -214,6 +236,7 @@ class ToDo extends Component {
         const index = this.getItemIndex(toDoItems, id);
         toDoItems[index].isArchived = !toDoItems[index].isArchived;
 
+        this.storeToDoItems(toDoItems);
         this.setState({ toDoItems });
     }
 
@@ -224,6 +247,8 @@ class ToDo extends Component {
         if (index > -1) {
             this.handleSnackbarOpen(todoItem, index);
             toDoItems.splice(index, 1);
+
+            this.storeToDoItems(toDoItems);
             this.setState({ toDoItems });
         }
     }
