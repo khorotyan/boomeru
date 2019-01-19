@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import styles from './ToDoItem.module.css';
 
 const moreOptions = [
+    'Duplicate',
     'Make recurring', // Undo recurring
     'Archive', // Unarchive
     'Delete'
@@ -26,21 +27,24 @@ class ToDoItem extends Component {
         this.props.onCheckClick();
     }
 
-    handleTextChange = event => {
+    handleTextChange = (event) => {
         this.props.onToDoTextChange(event.target.value);
     }
 
-    handleMoreClick = event => {
+    handleMoreClick = (event) => {
         const option = event.target.textContent;
 
         switch (option) {
             case moreOptions[0]:
-                this.props.onItemRecurringClick();
+                this.props.onItemDuplicateClick();
                 break;
             case moreOptions[1]:
-                this.props.onItemArchiveClick();
+                this.props.onItemRecurringClick();
                 break;
             case moreOptions[2]:
+                this.props.onItemArchiveClick();
+                break;
+            case moreOptions[3]:
                 this.props.onItemDeleteClick();
                 break;
             default:

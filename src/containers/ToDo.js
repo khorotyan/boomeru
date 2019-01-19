@@ -25,7 +25,7 @@ class ToDo extends Component {
         selectedStatus: [StatusOptions.Open, StatusOptions.Closed]
     }
 
-    onAddItem = (text) => {
+    onAddItem = (text, isRecurring = false) => {
         const toDoItems = [...this.state.toDoItems];
 
         let id = 0;
@@ -41,7 +41,7 @@ class ToDo extends Component {
             toDoText: text,
             createDate: date,
             updateDate: date,
-            isRecurring: false,
+            isRecurring: isRecurring,
             isArchived: false
         });
         toDoItems.unshift(newToDoItem);
@@ -146,6 +146,10 @@ class ToDo extends Component {
         this.setState({ toDoItems });
     }
 
+    makeItemDuplicate = (toDoText, isRecurring) => {
+        this.onAddItem(toDoText, isRecurring);
+    }
+
     makeItemRecurring = (id) => {
         const toDoItems = [...this.state.toDoItems];
         const index = this.getItemIndex(toDoItems, id);
@@ -201,6 +205,7 @@ class ToDo extends Component {
                         isArchived={toDoItem.isArchived}
                         onCheckClick={() => this.changeIsDoneStatus(toDoItem.id)}
                         onToDoTextChange={(newText) => this.changeToDoText(newText, toDoItem.id)}
+                        onItemDuplicateClick={() => this.makeItemDuplicate(toDoItem.toDoText, toDoItem.isRecurring)}
                         onItemRecurringClick={() => this.makeItemRecurring(toDoItem.id)}
                         onItemArchiveClick={() => this.archiveItem(toDoItem.id)}
                         onItemDeleteClick={() => this.deleteItem(toDoItem.id)}/>
