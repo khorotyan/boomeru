@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import ToDoItem from './ToDoItem';
 import ToDoCreator from './ToDoCreator';
-import FieldTitles from './FieldTitles';
+import FieldTitles from '../components/FieldTitles';
 import styles from './ToDo.module.css';
 import StatusOptions from '../entities/StatusOptions';
 import FilterOptions from '../entities/FilterOptions';
