@@ -6,9 +6,8 @@ ________________________________________________________________________________
 
 Coming Soon:
 
-1. Undo when deleting an item
-2. Cache data in the browser
-3. Fix more item click menu - undo recurring and unarchive
+1. Cache data in the browser
+2. Fix more item click menu - undo recurring and unarchive
 
 _______________________________________________________________________________________________
 
@@ -29,8 +28,8 @@ Added:
 10. Ability to archive a ToDoItem 
 11. Ability to make a ToDoItem recurring
 12. Working Filter for recurring and archived ToDoItems
-
 13. Duplicate an item
+14. Undo delete item action
 
 Changes & Improvements:
 

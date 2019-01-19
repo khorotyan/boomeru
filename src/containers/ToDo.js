@@ -6,6 +6,10 @@ import FieldTitles from './FieldTitles';
 import styles from './ToDo.module.css';
 import StatusOptions from '../entities/StatusOptions';
 import FilterOptions from '../entities/FilterOptions';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
     'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -13,7 +17,6 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
 const OrderType = Object.freeze({createdOrder: 1, updatedOrder: 2})
 
 class ToDo extends Component {
-
     state = {
         toDoItems: [],
         sortOrder: {
@@ -22,7 +25,55 @@ class ToDo extends Component {
         },
         filterText: "",
         selectedFilter: FilterOptions.None,
-        selectedStatus: [StatusOptions.Open, StatusOptions.Closed]
+        selectedStatus: [StatusOptions.Open, StatusOptions.Closed],
+        isSnackbarOpen: false,
+        lastDeletedItem: {
+            toDoItem: {},
+            index: -1
+        }
+    }
+
+    handleSnackbarOpen = (toDoItem, index) => {
+        const isSnackbarOpen = this.state.isSnackbarOpen;
+
+        this.setState({ lastDeletedItem: {toDoItem, index} }); 
+
+        if (isSnackbarOpen) {
+            this.setState({ isSnackbarOpen: false });
+        } else {
+            this.processSnackbarQueue(toDoItem, index);
+        }
+    }
+
+    processSnackbarQueue = (toDoItem = null, index) => {
+        const lastDeletedItem = this.state.lastDeletedItem;
+
+        if (Object.keys(lastDeletedItem.toDoItem).length === 0) {
+            this.setState({ isSnackbarOpen: true, lastDeletedItem: {toDoItem, index} });
+        } else {
+            this.setState({ lastDeletedItem: {toDoItem: {}, index: -1} });
+        }
+    }
+
+    handleSnackbarClose = (event, reason) => {
+        if (reason === "clickaway" && event.type === "mouseup") {
+            return;
+        }
+
+        this.setState({ isSnackbarOpen: false });
+    }
+
+    handleSnackbarUndo = () => {
+        const lastDeletedItem = this.state.lastDeletedItem;
+        const toDoItems = [...this.state.toDoItems];
+        
+        toDoItems.splice(lastDeletedItem.index, 0, lastDeletedItem.toDoItem);
+
+        this.setState({ toDoItems, isSnackbarOpen: false });
+    }
+
+    handleSnackbarExited = () => {
+        this.processSnackbarQueue();
     }
 
     onAddItem = (text, isRecurring = false) => {
@@ -166,11 +217,12 @@ class ToDo extends Component {
         this.setState({ toDoItems });
     }
 
-    deleteItem = (id) => {
+    deleteItem = (todoItem) => {
         const toDoItems = [...this.state.toDoItems];
-        const index = this.getItemIndex(toDoItems, id);
+        const index = this.getItemIndex(toDoItems, todoItem.id);
 
         if (index > -1) {
+            this.handleSnackbarOpen(todoItem, index);
             toDoItems.splice(index, 1);
             this.setState({ toDoItems });
         }
@@ -179,6 +231,8 @@ class ToDo extends Component {
     render() {
         let toDoItems = [...this.state.toDoItems];
         const sortOrder = this.state.sortOrder; 
+        const lastDeletedItem = this.state.lastDeletedItem;
+        const isSnackbarOpen = this.state.isSnackbarOpen;
 
         toDoItems.sort((itemA, itemB) => {
             if (sortOrder.type === OrderType.createdOrder) {
@@ -208,7 +262,7 @@ class ToDo extends Component {
                         onItemDuplicateClick={() => this.makeItemDuplicate(toDoItem.toDoText, toDoItem.isRecurring)}
                         onItemRecurringClick={() => this.makeItemRecurring(toDoItem.id)}
                         onItemArchiveClick={() => this.archiveItem(toDoItem.id)}
-                        onItemDeleteClick={() => this.deleteItem(toDoItem.id)}/>
+                        onItemDeleteClick={() => this.deleteItem(toDoItem)}/>
                 })}
             </div>
         );
@@ -225,6 +279,23 @@ class ToDo extends Component {
                     onUpdatedClick={this.changeUpdatedOrder}
                     show={this.filterItems().length > 0}/>
                 {toDoList}
+                <Snackbar
+                    anchorOrigin={{vertical: "bottom", horizontal: "left"}}
+                    open={isSnackbarOpen}
+                    autoHideDuration={3000}
+                    onClose={this.handleSnackbarClose}
+                    onExited={this.handleSnackbarExited}
+                    ContentProps={{"aria-describedby": "desc-message-id"}}
+                    message={<span id="desc-message-id">{lastDeletedItem.toDoItem.toDoText}</span>}
+                    action={[
+                        <Button key="undo" color="secondary" size="small" onClick={this.handleSnackbarUndo}>UNDO</Button>,
+                        <IconButton 
+                            style={{color: "#ffffff"}}
+                            key="close"
+                            onClick={this.handleSnackbarClose}>
+                            <CloseIcon/>
+                        </IconButton>
+                    ]}/>
             </div>
         );
     }
