@@ -7,7 +7,7 @@ ________________________________________________________________________________
 Coming Soon:
 
 1. Cache data in the browser
-2. Fix more item click menu - undo recurring and unarchive
+2. Project structure and code improvements
 
 _______________________________________________________________________________________________
 
