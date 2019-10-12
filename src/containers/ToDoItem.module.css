@@ -17,3 +17,28 @@
     position: relative;
     width: 360px;
 }
+
+@media screen and (max-width: 800px)  {
+    .card {
+        width: 100% !important;
+        margin: 4px 0px 0px 0px; 
+    }
+
+    .cardActions {
+        width: 100% !important;
+        display: flex;
+    }
+
+    .createDate {
+        display: none;
+    }
+    
+    .updateDate {
+        display: none;
+    }
+    
+    .textInput {
+        position: inherit;
+        width: 100% !important;
+    }
+}
