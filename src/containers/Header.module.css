@@ -1,19 +1,27 @@
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchWrapper {
+    display: flex;
+    padding-right: 80px;
+}
+
 .pageName {
     position: relative;
-    left: 40px;
-    width: 54%;
+    padding-left: 40px;
     min-width: 160px;
 }
 
 .searchRoot {
     position: relative;
     left: 0px;
-    height: 36px;
+    height: 40px;
     padding: 2px 2px;
     display: flex;
     align-items: center;
-    width: 20%;
-    min-width: 150px;
+    min-width: 300px;
 }
 
 .searchInput {
@@ -22,9 +30,16 @@
 }
 
 .searchButton {
-    width: 37px;
-    height: 37px;
-    padding: 12px;
+    width: 42px;
+    height: 42px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center; 
+}
+
+.searchButtonIcon {
+    width: 20px;
+    height:  20px;
 }
 
 .filterSelector {
@@ -39,4 +54,21 @@
 
 .selectorWidth {
     min-width: 80px;
+}
+
+@media screen and (max-width: 800px)  { 
+
+    .pageName {
+        padding-left: 10px;
+        min-width: 120px;
+    }
+
+    .searchWrapper {
+        padding-right: 0px;
+        margin-right: 22px;
+    }
+
+    .searchRoot {
+        display: none;
+    }
 }
