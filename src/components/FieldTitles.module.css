@@ -11,3 +11,17 @@
     position: relative;
     left: 438px;
 }
+
+@media screen and (max-width: 800px)  {
+    .centralDiv {
+        margin-top: 12px;
+    }
+
+    .createdButton {
+        display: none !important;
+    }
+
+    .updatedButton {
+        display: none !important;
+    }
+}

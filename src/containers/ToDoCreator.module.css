@@ -1,9 +1,14 @@
 .card {
     margin-top: 24px;
     margin-bottom: 4px;
+    max-width: 700px;
     width: 700px;
     height: 64px;
-    display: flex;
+}
+
+.cardActions {
+    width: 100%;
+    height: 100%;
 }
 
 .inputField {
@@ -21,3 +26,26 @@
     position: relative;
     left: 68px;
 }
+
+@media screen and (max-width: 800px)  {
+    .card {
+        width: 90%;
+        justify-content: center;
+    }
+
+    .inputField {
+        position: inherit;
+        width: 100%;
+    }
+
+    .saveButton {
+        position: inherit;
+        left: inherit;
+    }
+
+    .closeButton {
+        position: inherit;
+        left: inherit;
+    }
+}
+
