@@ -84,78 +84,96 @@ class Header extends Component {
   render() {
     return (
       <AppBar position="relative">
-        <Toolbar className={styles.headerWrapper}>
-          <Typography
-            style={{ userSelect: "none", cursor: "pointer" }}
-            className={styles.pageName}
-            variant="h6"
-            color="inherit"
-            noWrap
-            onClick={() => window.location.reload()}
-          >
-            Boomeru
-          </Typography>
-          <div className={styles.searchWrapper}>
-            <Paper className={styles.searchRoot} elevation={1}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Toolbar className={styles.headerWrapper}>
+            <Typography
+              style={{ userSelect: "none", cursor: "pointer" }}
+              className={styles.pageName}
+              variant="h6"
+              color="inherit"
+              noWrap
+              onClick={() => window.location.reload()}
+            >
+              Boomeru
+            </Typography>
+            <div className={styles.searchWrapper}>
+              <Paper className={styles.searchRoot} elevation={1}>
+                <InputBase
+                  className={styles.searchInput}
+                  placeholder="Search..."
+                  onChange={this.handleSearchTextChange}
+                />
+                <IconButton className={styles.searchButton} aria-label="Search">
+                  <Search fontSize="small" />
+                </IconButton>
+              </Paper>
+              <FormControl className={styles.filterSelector}>
+                <InputLabel style={{ color: "#ffffff" }}>Filter</InputLabel>
+                <Select
+                  style={{ color: "#ffffff" }}
+                  className={styles.selectorWidth}
+                  open={this.state.filterSelector.open}
+                  onOpen={this.handleFilterOpen}
+                  onClose={this.handleFilterClose}
+                  value={this.state.filterSelector.filter}
+                  onChange={this.handleFilterChange}
+                >
+                  <MenuItem value={FilterOptions.None}>
+                    {FilterOptions.None}
+                  </MenuItem>
+                  <MenuItem value={FilterOptions.Recurring}>
+                    {FilterOptions.Recurring}
+                  </MenuItem>
+                  <MenuItem value={FilterOptions.Archived}>
+                    {FilterOptions.Archived}
+                  </MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl className={styles.statusSelector}>
+                <InputLabel style={{ color: "#ffffff" }}>Status</InputLabel>
+                <Select
+                  multiple
+                  style={{ color: "#ffffff" }}
+                  className={styles.selectorWidth}
+                  open={this.state.statusSelector.open}
+                  onOpen={this.handleStatusOpen}
+                  onClose={this.handleStatusClose}
+                  value={this.state.statusSelector.status}
+                  renderValue={selected => selected.join(", ")}
+                  onChange={this.handleStatusChange}
+                >
+                  {allStatusOptions.map(statusOption => (
+                    <MenuItem key={statusOption} value={statusOption}>
+                      <Checkbox
+                        checked={
+                          this.state.statusSelector.status.indexOf(
+                            statusOption
+                          ) > -1
+                        }
+                      />
+                      <ListItemText primary={statusOption} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+          </Toolbar>
+          <Toolbar className={styles.mobileSearch}>
+            <Paper className={styles.mobileSearchPaper}>
               <InputBase
-                className={styles.searchInput}
+                className={styles.mobileSearchBase}
                 placeholder="Search..."
                 onChange={this.handleSearchTextChange}
               />
-              <IconButton className={styles.searchButton} aria-label="Search">
+              <IconButton
+                className={styles.mobileSearchIcon}
+                aria-label="Search"
+              >
                 <Search fontSize="small" />
               </IconButton>
             </Paper>
-            <FormControl className={styles.filterSelector}>
-              <InputLabel style={{ color: "#ffffff" }}>Filter</InputLabel>
-              <Select
-                style={{ color: "#ffffff" }}
-                className={styles.selectorWidth}
-                open={this.state.filterSelector.open}
-                onOpen={this.handleFilterOpen}
-                onClose={this.handleFilterClose}
-                value={this.state.filterSelector.filter}
-                onChange={this.handleFilterChange}
-              >
-                <MenuItem value={FilterOptions.None}>
-                  {FilterOptions.None}
-                </MenuItem>
-                <MenuItem value={FilterOptions.Recurring}>
-                  {FilterOptions.Recurring}
-                </MenuItem>
-                <MenuItem value={FilterOptions.Archived}>
-                  {FilterOptions.Archived}
-                </MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl className={styles.statusSelector}>
-              <InputLabel style={{ color: "#ffffff" }}>Status</InputLabel>
-              <Select
-                multiple
-                style={{ color: "#ffffff" }}
-                className={styles.selectorWidth}
-                open={this.state.statusSelector.open}
-                onOpen={this.handleStatusOpen}
-                onClose={this.handleStatusClose}
-                value={this.state.statusSelector.status}
-                renderValue={selected => selected.join(", ")}
-                onChange={this.handleStatusChange}
-              >
-                {allStatusOptions.map(statusOption => (
-                  <MenuItem key={statusOption} value={statusOption}>
-                    <Checkbox
-                      checked={
-                        this.state.statusSelector.status.indexOf(statusOption) >
-                        -1
-                      }
-                    />
-                    <ListItemText primary={statusOption} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-        </Toolbar>
+          </Toolbar>
+        </div>
       </AppBar>
     );
   }

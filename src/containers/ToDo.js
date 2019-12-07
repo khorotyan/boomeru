@@ -103,6 +103,16 @@ class ToDo extends Component {
           updateDate: new Date(),
           isRecurring: false,
           isArchived: false
+        },
+        {
+          id: 5,
+          isDone: false,
+          toDoText:
+            "Add as many todos as you want, and make your day productive !",
+          createDate: new Date(),
+          updateDate: new Date(),
+          isRecurring: false,
+          isArchived: false
         }
       ];
     }
