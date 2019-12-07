@@ -55,7 +55,56 @@ class ToDo extends Component {
     const jsonToDoItems = localStorage.getItem(TODOITEMS_KEY);
 
     if (jsonToDoItems === null) {
-      return [];
+      return [
+        {
+          id: 0,
+          isDone: false,
+          toDoText: "This is an example of a todo text",
+          createDate: new Date(),
+          updateDate: new Date(),
+          isRecurring: false,
+          isArchived: false
+        },
+        {
+          id: 1,
+          isDone: true,
+          toDoText: "Mark your todo 'complete' when you finish doing it",
+          createDate: new Date(),
+          updateDate: new Date(),
+          isRecurring: false,
+          isArchived: false
+        },
+        {
+          id: 2,
+          isDone: false,
+          toDoText:
+            "You can duplicate, make recurring, archive or delete a todo using the three dots beside each of them",
+          createDate: new Date(),
+          updateDate: new Date(),
+          isRecurring: false,
+          isArchived: false
+        },
+        {
+          id: 3,
+          isDone: false,
+          toDoText:
+            "If you are going to do something regularly, mark it as 'recurring'",
+          createDate: new Date(),
+          updateDate: new Date(),
+          isRecurring: true,
+          isArchived: false
+        },
+        {
+          id: 4,
+          isDone: true,
+          toDoText:
+            "You can filter to only see the recurring or archived todos by selecting a filter",
+          createDate: new Date(),
+          updateDate: new Date(),
+          isRecurring: false,
+          isArchived: false
+        }
+      ];
     }
 
     const toDoItems = JSON.parse(jsonToDoItems);

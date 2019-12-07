@@ -86,10 +86,12 @@ class Header extends Component {
       <AppBar position="relative">
         <Toolbar className={styles.headerWrapper}>
           <Typography
+            style={{ userSelect: "none", cursor: "pointer" }}
             className={styles.pageName}
             variant="h6"
             color="inherit"
             noWrap
+            onClick={() => window.location.reload()}
           >
             Boomeru
           </Typography>

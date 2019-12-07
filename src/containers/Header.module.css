@@ -1,74 +1,73 @@
 .headerWrapper {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .searchWrapper {
-    display: flex;
-    padding-right: 80px;
+  display: flex;
+  padding-right: 80px;
 }
 
 .pageName {
-    position: relative;
-    padding-left: 40px;
-    min-width: 160px;
+  position: relative;
+  padding-left: 40px;
+  min-width: 120px;
 }
 
 .searchRoot {
-    position: relative;
-    left: 0px;
-    height: 40px;
-    padding: 2px 2px;
-    display: flex;
-    align-items: center;
-    min-width: 300px;
+  position: relative;
+  left: 0px;
+  height: 40px;
+  padding: 2px 2px;
+  display: flex;
+  align-items: center;
+  min-width: 300px;
 }
 
 .searchInput {
-    margin-left: 14px;
-    flex: 1;
+  margin-left: 14px;
+  flex: 1;
 }
 
 .searchButton {
-    width: 42px;
-    height: 42px;
-    display: flex !important;
-    justify-content: center;
-    align-items: center; 
+  width: 42px;
+  height: 42px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
 
 .searchButtonIcon {
-    width: 20px;
-    height:  20px;
+  width: 20px;
+  height: 20px;
 }
 
 .filterSelector {
-    position: relative;
-    left: 4%;
+  position: relative;
+  left: 4%;
 }
 
 .statusSelector {
-    position: relative;
-    left: 8%;
+  position: relative;
+  left: 8%;
 }
 
 .selectorWidth {
-    min-width: 80px;
+  min-width: 80px;
 }
 
-@media screen and (max-width: 800px)  { 
+@media screen and (max-width: 800px) {
+  .pageName {
+    padding-left: 10px;
+    min-width: 120px;
+  }
 
-    .pageName {
-        padding-left: 10px;
-        min-width: 120px;
-    }
+  .searchWrapper {
+    padding-right: 0px;
+    margin-right: 22px;
+  }
 
-    .searchWrapper {
-        padding-right: 0px;
-        margin-right: 22px;
-    }
-
-    .searchRoot {
-        display: none;
-    }
+  .searchRoot {
+    display: none;
+  }
 }
